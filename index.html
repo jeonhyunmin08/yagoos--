@@ -3,156 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>야구스 순창군수배 전국유소년 야구대회 기록</title>
+  <title>야구스 기록원 전용</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
     body {
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       color: white;
       min-height: 100vh;
     }
-
-    .page {
-      display: flex;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .container {
-      text-align: center;
-      background: rgba(0, 0, 0, 0.25);
-      width: 95%;
-      max-width: 760px;
-      padding: 65px 55px;
-      border-radius: 26px;
+    .page { min-height: 100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+    .container{
+      text-align:center;
+      background: rgba(0,0,0,0.25);
+      width:95%; max-width:760px;
+      padding:60px 50px;
+      border-radius:26px;
       backdrop-filter: blur(10px);
       box-shadow: 0 12px 35px rgba(0,0,0,0.35);
     }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
+    h1{ font-size:32px; margin-bottom:14px; }
+    .sub{ opacity:.9; margin-bottom:26px; line-height:1.7; }
+    .card{
+      margin: 18px auto 26px;
+      padding: 18px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.10);
+      text-align:left;
+      max-width: 460px;
     }
-
-    p {
-      font-size: 16px;
-      line-height: 1.8;
-      margin-bottom: 25px;
-      opacity: 0.9;
-    }
-
-    .date-picker {
-      margin: 18px 0 28px;
-    }
-
-    input[type="date"] {
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: none;
+    .row{ display:flex; gap:10px; align-items:center; justify-content:space-between; padding:10px 0; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .row:last-child{ border-bottom:none; }
+    .label{ opacity:.85; font-size:13px; }
+    .value{ font-weight:700; font-size:16px; letter-spacing:.3px; }
+    .btns{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+    .btn{
+      padding: 14px 22px;
       font-size: 14px;
-      outline: none;
-      max-width: 220px;
-    }
-
-    .btn {
-      white-space: nowrap;
-      display: inline-block;
-      padding: 14px 30px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #2a5298;
+      font-weight: 800;
+      color:#2a5298;
       background: white;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: 0.3s;
-      cursor: pointer;
+      border-radius: 999px;
       border: none;
+      cursor:pointer;
+      transition:.2s;
+      white-space: nowrap;
     }
-
-    .btn:hover {
-      background: #f1f1f1;
-      transform: translateY(-2px);
-    }
-
-    footer {
-      margin-top: 30px;
+    .btn:hover{ transform: translateY(-2px); background:#f1f1f1; }
+    .btn.secondary{ background: rgba(255,255,255,0.18); color: white; font-weight:700; }
+    .hint{ margin-top:14px; opacity:.8; font-size:13px; line-height:1.6; }
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.75);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 12px;
       font-size: 13px;
-      opacity: 0.6;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
     }
-
-    @media (max-width: 768px) {
-      .container {
-        max-width: 95%;
-        padding: 55px 35px;
-      }
-    }
+    .toast.show{ opacity: 1; }
+    footer{ margin-top:26px; opacity:.6; font-size:12px; }
   </style>
 </head>
-
 <body>
   <div class="page">
     <div class="container">
-      <h1>야구스</h1>
-
-      <p>
-        순창군수배<br />
-        기록하러 이동하기<br />
-        아이디: brm1<br />
-        비밀번호: 1125
-      </p>
-
-      <!-- ✅ 날짜 선택 UI (원래 코드에서 빠져있던 부분) -->
-      <div class="date-picker">
-        <input type="date" id="dateInput" />
+      <h1>야구스 기록원 전용</h1>
+      <div class="sub">
+        버튼 누르면 <b>야구스 로그인 화면</b>으로 바로 이동합니다.<br/>
+        아래 <b>복사 버튼</b>으로 아이디/비번을 붙여넣기만 하면 끝!
       </div>
 
-      <!-- ✅ 이동 버튼 -->
-      <button id="moveBtn" class="btn" type="button">
-        기록하러 가기
-      </button>
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="label">아이디</div>
+            <div class="value" id="idText">brm1</div>
+          </div>
+          <button class="btn secondary" id="copyIdBtn" type="button">아이디 복사</button>
+        </div>
+        <div class="row">
+          <div>
+            <div class="label">비밀번호</div>
+            <div class="value" id="pwText">1125</div>
+          </div>
+          <button class="btn secondary" id="copyPwBtn" type="button">비번 복사</button>
+        </div>
+      </div>
 
-      <footer>
-        made by hyunmin
-      </footer>
+      <div class="btns">
+        <button class="btn" id="goLoginBtn" type="button">로그인 화면으로 이동</button>
+        <button class="btn secondary" id="goRecordBtn" type="button">기록 페이지로 이동</button>
+      </div>
+
+      <div class="hint">
+        ✅ 추천 순서: <b>로그인 화면 이동</b> → 아이디/비번 <b>복사</b> → 붙여넣기 → 로그인<br/>
+      </div>
+
+      <footer>made by hyunmin</footer>
     </div>
   </div>
 
+  <div class="toast" id="toast">복사 완료!</div>
+
   <script>
-    const dateInput = document.getElementById("dateInput");
-    const moveBtn = document.getElementById("moveBtn");
+    // 👉 여기만 바꾸면 됨 (로그인 페이지 / 기록 페이지)
+    const LOGIN_URL  = "https://mineball.kr/ac/kybf/account/login?returnUrl=https%3A%2F%2Fmineball.kr%2F%25EB%258C%2580%25ED%259A%258C%25EC%259D%25BC%25EC%25A0%2595%25EA%25B2%25B0%25EA%25B3%25BC%2Fjnmgplmhlk%2Fkybf%2Fac"; // 로그인 화면 주소를 정확히 알고 있으면 여기에 넣기
+    const RECORD_URL = "https://mineball.kr/%EB%8C%80%ED%9A%8C%EC%9D%BC%EC%A0%95%EA%B2%B0%EA%B3%BC/jnmgplmhlk/kybf/ac";
 
-    // ✅ 오늘 날짜 자동 설정
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const formattedToday = `${yyyy}-${mm}-${dd}`;
+    const ID_VALUE = "brm1";
+    const PW_VALUE = "1125";
 
-    dateInput.value = formattedToday;
+    const toast = document.getElementById("toast");
+    const showToast = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 900);
+    };
 
-    // ✅ 버튼 클릭 시 날짜 적용
-    moveBtn.addEventListener("click", () => {
-      const selectedDate = dateInput.value;
-
-      const baseUrl =
-        "https://mineball.kr/%EB%8C%80%ED%9A%8C%EC%9D%BC%EC%A0%95%EA%B2%B0%EA%B3%BC/jnmgplmhlk/kybf/ac?date=";
-
-      if (!selectedDate) {
-        alert("날짜를 선택해주세요 🙂");
-        return;
+    async function copyText(text, successMsg) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(successMsg);
+      } catch (e) {
+        // 일부 환경(권한/보안 설정)에서 clipboard가 막힐 수 있어 fallback
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showToast(successMsg);
       }
+    }
 
-      window.location.href = baseUrl + selectedDate;
+    document.getElementById("copyIdBtn").addEventListener("click", () => copyText(ID_VALUE, "아이디 복사 완료!"));
+    document.getElementById("copyPwBtn").addEventListener("click", () => copyText(PW_VALUE, "비밀번호 복사 완료!"));
+
+    document.getElementById("goLoginBtn").addEventListener("click", () => {
+      // 새 탭으로 열고 싶으면 window.open(LOGIN_URL, "_blank");
+      window.location.href = LOGIN_URL;
+    });
+
+    document.getElementById("goRecordBtn").addEventListener("click", () => {
+      window.location.href = RECORD_URL;
     });
   </script>
 </body>
