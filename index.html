@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>야구스 순창군수배 전국유소년 야구대회 기록</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .page {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.25);
+      width: 95%;
+      max-width: 760px;
+      padding: 65px 55px;
+      border-radius: 26px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      opacity: 0.9;
+    }
+
+    .date-picker {
+      margin: 18px 0 28px;
+    }
+
+    input[type="date"] {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      outline: none;
+      max-width: 220px;
+    }
+
+    .btn {
+      white-space: nowrap;
+      display: inline-block;
+      padding: 14px 30px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #2a5298;
+      background: white;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: #f1f1f1;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        max-width: 95%;
+        padding: 55px 35px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="container">
+      <h1>야구스</h1>
+
+      <p>
+        순창군수배<br />
+        기록하러 이동하기<br />
+        아이디: brm1<br />
+        비밀번호: 1125
+      </p>
+
+      <!-- ✅ 날짜 선택 UI (원래 코드에서 빠져있던 부분) -->
+      <div class="date-picker">
+        <input type="date" id="dateInput" />
+      </div>
+
+      <!-- ✅ 이동 버튼 -->
+      <button id="moveBtn" class="btn" type="button">
+        기록하러 가기
+      </button>
+
+      <footer>
+        made by hyunmin
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const dateInput = document.getElementById("dateInput");
+    const moveBtn = document.getElementById("moveBtn");
+
+    // ✅ 오늘 날짜 자동 설정
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const formattedToday = `${yyyy}-${mm}-${dd}`;
+
+    dateInput.value = formattedToday;
+
+    // ✅ 버튼 클릭 시 날짜 적용
+    moveBtn.addEventListener("click", () => {
+      const selectedDate = dateInput.value;
+
+      const baseUrl =
+        "https://mineball.kr/%EB%8C%80%ED%9A%8C%EC%9D%BC%EC%A0%95%EA%B2%B0%EA%B3%BC/jnmgplmhlk/kybf/ac?date=";
+
+      if (!selectedDate) {
+        alert("날짜를 선택해주세요 🙂");
+        return;
+      }
+
+      window.location.href = baseUrl + selectedDate;
+    });
+  </script>
+</body>
+</html>
